@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
-import 'model.dart';
+import 'weatherModel.dart';
 
 class WeatherApiClient {
   static const baseUrl = 'https://www.metaweather.com';

@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 import 'weatherAPIclient.dart';
-import 'model.dart';
+import 'weatherModel.dart';
 
 class WeatherRepository {
   final WeatherApiClient weatherApiClient;

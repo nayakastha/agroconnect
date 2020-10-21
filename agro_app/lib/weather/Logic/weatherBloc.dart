@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'fetchWeather.dart';
 import 'weatherRepo.dart';
-import 'model.dart';
+import 'weatherModel.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final WeatherRepository weatherRepository;

@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
-import 'model.dart';
+import 'weatherModel.dart';
 
 abstract class WeatherState extends Equatable {
   WeatherState([List props = const []]) : super(props);
