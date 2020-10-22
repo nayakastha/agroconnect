@@ -2,8 +2,6 @@ import 'location_screen.dart';
 import '../services/weather.dart';
 
 import 'package:flutter/material.dart';
-import 'package:upgrader/upgrader.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 var weatherData;
 var hourlyData;
@@ -14,15 +12,11 @@ class LoadingScreen extends StatefulWidget {
   _LoadingScreenState createState() => _LoadingScreenState();
 }
 
-class _LoadingScreenState extends State<LoadingScreen>
-    with TickerProviderStateMixin {
+class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
-    // ignore: todo
-    // TODO: implement initState
     super.initState();
     getLocationData();
-
     print('in init state');
   }
 
@@ -43,36 +37,12 @@ class _LoadingScreenState extends State<LoadingScreen>
         },
       ),
     );
-    // Navigator.push(context, MaterialPageRoute(
-    //   builder: (context) {
-    //     return ExpansionpanelScreen();
-    //   },
-    // ));
   }
 
   @override
   Widget build(BuildContext context) {
-    final appcastURL =
-        'https://raw.githubusercontent.com/ug2454/Clima/master/lib/appcast.xml';
-    final cfg = AppcastConfiguration(url: appcastURL, supportedOS: ['android']);
-
     return Scaffold(
-      body: UpgradeAlert(
-        showIgnore: true,
-        showLater: true,
-        appcastConfig: cfg,
-        debugLogging: true,
-        child: Center(
-          child: SpinKitCubeGrid(
-            color: Color(0xFFc41a43),
-            size: 100.0,
-            controller: AnimationController(
-              vsync: this,
-              duration: const Duration(milliseconds: 1200),
-            ),
-          ),
-        ),
-      ),
+      body: CircularProgressIndicator(),
     );
   }
 }
