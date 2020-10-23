@@ -20,6 +20,7 @@ class Splashscreen extends StatelessWidget {
               width: double.maxFinite,
               child: Card(
                 elevation: 10,
+                child: Container(),
               ),
             )
           ],
@@ -29,18 +30,10 @@ class Splashscreen extends StatelessWidget {
   }
 }
 
-Widget cardChild(ImageProvider image, String text, BuildContext context) {
+Widget cardChild(
+    ImageProvider image, String text, BuildContext context, onclick) {
   return GestureDetector(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return LoadingScreen();
-          },
-        ),
-      );
-    },
+    onTap: onclick,
     child: Container(
       margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       child: Stack(
