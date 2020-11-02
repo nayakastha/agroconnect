@@ -1,4 +1,4 @@
-import 'package:agro_app/weather/loading.dart';
+import 'package:agro_app/weather/weather_screen.dart';
 import 'package:flutter/material.dart';
 
 class Splashscreen extends StatelessWidget {
@@ -39,7 +39,7 @@ class Splashscreen extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LoadingScreen()),
+                    MaterialPageRoute(builder: (context) => WeatherScreen()),
                   );
                 },
               ),
@@ -59,12 +59,7 @@ class Splashscreen extends StatelessWidget {
                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                   )),
                 ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoadingScreen()),
-                  );
-                },
+                onTap: () {},
               ),
             ),
             SizedBox(
@@ -82,12 +77,7 @@ class Splashscreen extends StatelessWidget {
                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                   )),
                 ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoadingScreen()),
-                  );
-                },
+                onTap: () {},
               ),
             ),
           ],

@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:weather/weather.dart';
 
 enum AppState { NOT_DOWNLOADED, DOWNLOADING, FINISHED_DOWNLOADING }
 
 class WeatherScreen extends StatefulWidget {
-  final double lat;
-  final double lon;
-
-  const WeatherScreen(double latitude, double longitude,
-      {Key key, this.lat, this.lon})
-      : super(key: key);
   @override
-  _WeatherScreenState createState() => _WeatherScreenState(lat, lon);
+  _WeatherScreenState createState() => _WeatherScreenState();
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
-  String key = '44a3dfbe5684f57cf5a68bdc1777a527';
+  Geolocator geolocator = new Geolocator();
+  String key = '856822fd8e22db5e1ba48c0e7d69844a';
   WeatherFactory ws;
   List<Weather> _data = [];
   AppState _state = AppState.NOT_DOWNLOADED;
-  double latitude, longitude;
-
-  _WeatherScreenState(double lat, double lon) {
-    latitude = lat;
-    longitude = lon;
-  }
+  double lat, lon;
+  double lati, longi;
 
   @override
   void initState() {
@@ -33,13 +25,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
   }
 
   void queryForecast() async {
+    /// Removes keyboard
     FocusScope.of(context).requestFocus(FocusNode());
     setState(() {
       _state = AppState.DOWNLOADING;
     });
 
-    List<Weather> forecasts =
-        await ws.fiveDayForecastByLocation(latitude, longitude);
+    List<Weather> forecasts = await ws.fiveDayForecastByLocation(lat, lon);
     setState(() {
       _data = forecasts;
       _state = AppState.FINISHED_DOWNLOADING;
@@ -47,13 +39,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
   }
 
   void queryWeather() async {
+    /// Removes keyboard
     FocusScope.of(context).requestFocus(FocusNode());
 
     setState(() {
       _state = AppState.DOWNLOADING;
     });
 
-    Weather weather = await ws.currentWeatherByLocation(latitude, longitude);
+    Weather weather = await ws.currentWeatherByLocation(lat, lon);
     setState(() {
       _data = [weather];
       _state = AppState.FINISHED_DOWNLOADING;
@@ -110,13 +103,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
           : contentNotDownloaded();
 
   void _saveLat(String input) {
-    latitude = double.tryParse(input);
-    print(latitude);
+    lat = double.tryParse(input);
+    print(lat);
   }
 
   void _saveLon(String input) {
-    longitude = double.tryParse(input);
-    print(longitude);
+    lon = double.tryParse(input);
+    print(lon);
   }
 
   Widget _coordinateInputs() {
@@ -128,8 +121,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
               child: TextField(
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: "Enter Latitude",
-                      hintText: latitude.toString()),
+                      hintText: 'Enter latitude',
+                      hintStyle: TextStyle(color: Colors.white38)),
                   keyboardType: TextInputType.number,
                   onChanged: _saveLat,
                   onSubmitted: _saveLat)),
@@ -140,8 +133,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 child: TextField(
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: "Enter Longitude",
-                        hintText: longitude.toString()),
+                        hintStyle: TextStyle(color: Colors.white38),
+                        hintText: 'Enter longitude'),
                     keyboardType: TextInputType.number,
                     onChanged: _saveLon,
                     onSubmitted: _saveLon)))
@@ -149,57 +142,91 @@ class _WeatherScreenState extends State<WeatherScreen> {
     );
   }
 
+  bool enhance = true;
   Widget _buttons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
+    return Column(
+      children: [
         Container(
           margin: EdgeInsets.all(5),
-          child: FlatButton(
+          child: RaisedButton(
+            elevation: 20,
             child: Text(
-              'Fetch weather',
+              'Get co-oordinates of your place',
               style: TextStyle(color: Colors.white),
             ),
-            onPressed: queryWeather,
-            color: Colors.blue,
+            onPressed: () {
+              /* Position _currentPosition;
+              Geolocator.getCurrentPosition(
+                      desiredAccuracy: LocationAccuracy.best)
+                  .then((Position position) {
+                _currentPosition = position;
+              }).catchError((e) {
+                print(e);
+              });
+              lati = _currentPosition.latitude;
+              longi = _currentPosition.longitude;
+              enhance = true; */
+            },
+            color: Colors.green[600],
           ),
         ),
-        Container(
-            margin: EdgeInsets.all(5),
-            child: FlatButton(
-              child: Text(
-                'Fetch forecast',
-                style: TextStyle(color: Colors.white),
+        enhance
+            ? Container(child: Text("Latitude : 20.8444  Longitude : 85.1511"))
+            : Container(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.all(5),
+              child: RaisedButton(
+                elevation: 20,
+                child: Text(
+                  'Fetch weather',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: queryWeather,
+                color: Colors.green[600],
               ),
-              onPressed: queryForecast,
-              color: Colors.blue,
-            ))
+            ),
+            Container(
+                margin: EdgeInsets.all(5),
+                child: RaisedButton(
+                  elevation: 20,
+                  child: Text(
+                    'Fetch forecast',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: queryForecast,
+                  color: Colors.green[600],
+                ))
+          ],
+        ),
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('Weather Example App'),
-          ),
-          body: Column(
-            children: <Widget>[
-              _coordinateInputs(),
-              _buttons(),
-              Text(
-                'Output:',
-                style: TextStyle(fontSize: 20),
-              ),
-              Divider(
-                height: 20.0,
-                thickness: 2.0,
-              ),
-              Expanded(child: _resultView())
-            ],
-          )),
-    );
+    return Scaffold(
+        backgroundColor: Colors.black54,
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text('Weather Details'),
+        ),
+        body: Column(
+          children: <Widget>[
+            _coordinateInputs(),
+            _buttons(),
+            Text(
+              'Output:',
+              style: TextStyle(fontSize: 20),
+            ),
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            Expanded(child: _resultView())
+          ],
+        ));
   }
 }
