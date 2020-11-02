@@ -67,17 +67,17 @@ flutter:
   fonts:
     - family: Spartan MB
       fonts:
-        - asset: fonts/SpartanMB-Black.otf
+        - asset: assets/fonts/SpartanMB-Black.otf
 
     - family: Roboto
       fonts:
-        - asset: fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
     - family: Playfair Display
       fonts:
-        - asset: fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf
+        - asset: assets/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf
     - family: Poppins
       fonts:
-        - asset: fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Regular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -15,8 +15,6 @@ const openWeatherDailyForecastURL =
 const airQualityURL = 'https://api.weatherbit.io/v2.0/current/airquality';
 
 class WeatherModel {
-  static final String openWeatherAPIKey = kOpenWeatherKey;
-
   Icon getWeatherIcon(int condition) {
     if (condition < 300) {
       return Icon(
@@ -69,19 +67,19 @@ class WeatherModel {
   }
 
   Future<dynamic> getCityWeather(String cityName) async {
-    print(openWeatherAPIKey);
+    print(kOpenWeatherKey);
     NetworkHelper networkHelper = NetworkHelper(
-        '$openWeatherMapURL?q=$cityName&appid=$openWeatherAPIKey&units=metric');
+        '$openWeatherMapURL?q=$cityName&appid=$kOpenWeatherKey&units=metric');
     var weatherData = await networkHelper.getData();
     return weatherData;
   }
 
   Future<dynamic> getLocationWeather() async {
-    print(openWeatherAPIKey);
+    print(kOpenWeatherKey);
     LocationCoordinates location = LocationCoordinates();
     await location.getCurrentLocation();
     NetworkHelper networkHelper = NetworkHelper(
-        '$openWeatherMapURL?lat=${location.getLatitude()}&lon=${location.getLongitude()}&appid=$openWeatherAPIKey&units=metric');
+        '$openWeatherMapURL?lat=${location.getLatitude()}&lon=${location.getLongitude()}&appid=$kOpenWeatherKey&units=metric');
     var weatherData = await networkHelper.getData();
     return weatherData;
   }
@@ -90,7 +88,7 @@ class WeatherModel {
     LocationCoordinates location = LocationCoordinates();
     await location.getCurrentLocation();
     NetworkHelper networkHelper = NetworkHelper(
-        '$openWeatherForecastURL?lat=${location.getLatitude()}&lon=${location.getLongitude()}&appid=$openWeatherAPIKey&units=metric');
+        '$openWeatherForecastURL?lat=${location.getLatitude()}&lon=${location.getLongitude()}&appid=$kOpenWeatherKey&units=metric');
     var weatherData = await networkHelper.getData();
     return weatherData;
   }
@@ -99,7 +97,7 @@ class WeatherModel {
     LocationCoordinates location = LocationCoordinates();
     await location.getCurrentLocation();
     NetworkHelper networkHelper = NetworkHelper(
-        '$openWeatherForecastURL?q=$cityName&appid=$openWeatherAPIKey&units=metric');
+        '$openWeatherForecastURL?q=$cityName&appid=$kOpenWeatherKey&units=metric');
     var weatherData = networkHelper.getData();
     return weatherData;
   }
@@ -108,7 +106,7 @@ class WeatherModel {
     LocationCoordinates location = LocationCoordinates();
     await location.getCurrentLocation();
     NetworkHelper networkHelper = NetworkHelper(
-        '$openWeatherDailyForecastURL?lat=${location.getLatitude()}&lon=${location.getLongitude()}&cnt=7&appid=$openWeatherAPIKey&units=metric');
+        '$openWeatherDailyForecastURL?lat=${location.getLatitude()}&lon=${location.getLongitude()}&cnt=7&appid=$kOpenWeatherKey&units=metric');
     var weatherData = networkHelper.getData();
     return weatherData;
   }
@@ -117,7 +115,7 @@ class WeatherModel {
     LocationCoordinates location = LocationCoordinates();
     await location.getCurrentLocation();
     NetworkHelper networkHelper = NetworkHelper(
-        '$openWeatherDailyForecastURL?q=$cityName&cnt=7&appid=$openWeatherAPIKey&units=metric');
+        '$openWeatherDailyForecastURL?q=$cityName&cnt=7&appid=$kOpenWeatherKey&units=metric');
     var weatherData = networkHelper.getData();
     return weatherData;
   }

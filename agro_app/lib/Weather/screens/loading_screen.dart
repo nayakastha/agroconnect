@@ -25,6 +25,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     weatherData = await weatherModel.getLocationWeather();
     hourlyData = await weatherModel.getHourlyWeather();
     dailyData = await weatherModel.getDailyWeather();
+    print(weatherData + hourlyData + dailyData);
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -42,7 +43,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CircularProgressIndicator(),
+      body: Center(
+          child: CircularProgressIndicator(
+        strokeWidth: 10,
+      )),
     );
   }
 }

@@ -2,11 +2,21 @@ import 'package:agro_app/Weather/screens/loading_screen.dart';
 import 'package:flutter/material.dart';
 
 class Splashscreen extends StatelessWidget {
-  const Splashscreen({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(84),
+        child: Center(
+          child: AppBar(
+            centerTitle: true,
+            title: Text(
+              "AGRO_CONNECT",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ),
       backgroundColor: Colors.green[600],
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -14,64 +24,75 @@ class Splashscreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(8.0),
-              height: MediaQuery.of(context).size.longestSide * 0.02,
-              width: double.maxFinite,
-              child: Card(
-                elevation: 10,
-                child: Container(),
+            Card(
+              child: InkWell(
+                child: Container(
+                  color: Colors.black54,
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.longestSide * 0.2,
+                  child: Center(
+                      child: Text(
+                    "Weather around you",
+                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                  )),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoadingScreen()),
+                  );
+                },
               ),
-            )
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Card(
+              child: InkWell(
+                child: Container(
+                  color: Colors.black54,
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.longestSide * 0.2,
+                  child: Center(
+                      child: Text(
+                    "Know your Soil",
+                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                  )),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoadingScreen()),
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Card(
+              child: InkWell(
+                child: Container(
+                  color: Colors.black54,
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.longestSide * 0.2,
+                  child: Center(
+                      child: Text(
+                    "Destroy the pest",
+                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                  )),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoadingScreen()),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-}
-
-Widget cardChild(
-    ImageProvider image, String text, BuildContext context, onclick) {
-  return GestureDetector(
-    onTap: onclick,
-    child: Container(
-      margin: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-      child: Stack(
-        children: <Widget>[cardImage(image, context), cardText(text, context)],
-      ),
-    ),
-  );
-}
-
-Widget cardImage(ImageProvider img, BuildContext context) {
-  return Container(
-    alignment: FractionalOffset.centerLeft,
-    child: Image(
-      image: img,
-      height: MediaQuery.of(context).size.longestSide * 0.01,
-      width: MediaQuery.of(context).size.longestSide * 0.01,
-    ),
-  );
-}
-
-Widget cardText(String text, BuildContext context) {
-  return Container(
-    height: MediaQuery.of(context).size.longestSide * 0.18,
-    child: Text(
-      text,
-      style: TextStyle(color: Colors.white, fontSize: 24),
-    ),
-    decoration: new BoxDecoration(
-      color: new Color(0xFF333366),
-      shape: BoxShape.rectangle,
-      borderRadius: new BorderRadius.circular(8.0),
-      boxShadow: <BoxShadow>[
-        new BoxShadow(
-          color: Colors.black12,
-          blurRadius: 10.0,
-          offset: new Offset(0.0, 10.0),
-        ),
-      ],
-    ),
-  );
 }
