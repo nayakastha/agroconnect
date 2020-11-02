@@ -14,17 +14,9 @@ dependencies:
   flutter:
     sdk: flutter
   geolocator: ^6.1.1
-  get: ^3.13.2
   http: ^0.12.2
   intl: ^0.16.1
-  fluttericon: ^1.0.7
-  shared_preferences: ^0.5.12+2
-  provider: ^4.3.2+2
-  flutter_spinkit: ^4.1.2+1
-  uuid: ^2.2.2
-  upgrader: ^2.5.0
-  modal_progress_hud: ^0.1.3
-  syncfusion_flutter_gauges: ^18.2.57
+  weather: ^1.2.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -64,20 +56,7 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Spartan MB
-      fonts:
-        - asset: assets/fonts/SpartanMB-Black.otf
-
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/Roboto-Regular.ttf
-    - family: Playfair Display
-      fonts:
-        - asset: assets/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
+  
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -1,4 +1,4 @@
-import 'package:agro_app/Weather/screens/loading_screen.dart';
+import 'package:agro_app/weather/loading.dart';
 import 'package:flutter/material.dart';
 
 class Splashscreen extends StatelessWidget {
